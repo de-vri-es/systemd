@@ -4252,8 +4252,8 @@ int main(int argc, char *argv[]) {
         if (arg_directory) {
                 assert(!arg_image);
 
-                if (path_equal(arg_directory, "/") && !arg_ephemeral) {
-                        log_error("Spawning container on root directory is not supported. Consider using --ephemeral.");
+                if (path_equal(arg_directory, "/") && !arg_ephemeral && arg_volatile_mode == VOLATILE_NO) {
+                        log_error("Spawning non-volatile container on root directory is not supported. Consider using --ephemeral or --volatile.");
                         r = -EINVAL;
                         goto finish;
                 }
